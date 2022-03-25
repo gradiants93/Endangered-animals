@@ -54,6 +54,7 @@ const SpeciesForm = (props) => {
     <form onSubmit={handleSubmit}>
       <fieldset>
         <label>Common Name</label>
+        {" "}
         <input
           type="text"
           id="add-common-name"
@@ -63,6 +64,7 @@ const SpeciesForm = (props) => {
           onChange={handleCommonNameChange}
         />
         <label>Scientific Name</label>
+        {" "}
         <input
           type="text"
           id="add-scientific-name"
@@ -72,6 +74,7 @@ const SpeciesForm = (props) => {
           onChange={handleScientificNameChange}
         />
         <label>Number in the Wild</label>
+        {" "}
         <input
           type="text"
           id="add-number-in-the-wild"
@@ -82,14 +85,15 @@ const SpeciesForm = (props) => {
         />
         {/*  */}
         <label>Conservation Status</label>
-        <input
-          type="text"
-          id="add-conservation-status"
-          placeholder="Conservation Status Code"
-          required
-          value={species.conservationstatus}
-          onChange={handleConservationStatusChange}
-        />
+        {" "}
+        <select required onChange={handleConservationStatusChange}>
+          <option value={'LC'} key={1}>LC - Least Concern</option>
+          <option value={'VU'} key={2}>VU - Vulnerable</option>
+          <option value={'NT'} key={3}>NT - Near Threatened</option>
+          <option value={'EN'} key={4}>EN - Endangered</option>
+          <option value={'EW'} key={5}>EW - Extinct in the Wild</option>
+          <option value={'EX'} key={6}>EX - Extinct</option>
+        </select>
       </fieldset>
       <button type="submit">Add</button>
     </form>
