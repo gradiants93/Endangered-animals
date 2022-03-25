@@ -36,20 +36,31 @@ app.post('/api/species', cors(), async (req, res) => {
     commonname: req.body.commonname,
     scientificname: req.body.scientificname,
     numberinthewild: req.body.numberinthewild,
+    conservationstatus: req.body.conservationstatus
   };
   console.log([newSpecies.commonname, newSpecies.scientificname]);
   const result = await db.query(
-    'INSERT INTO species(commonname, scientificname, numberinthewild) VALUES($1, $2, $3) RETURNING *',
-    [newSpecies.commonname, newSpecies.scientificname, newSpecies.numberinthewild],
+    'INSERT INTO species(commonname, scientificname, numberinthewild, conservationstatus) VALUES($1, $2, $3, $4) RETURNING *',
+    [newSpecies.commonname, newSpecies.scientificname, newSpecies.numberinthewild, newSpecies.conservationstatus],
   );
   console.log(result.rows[0]);
   res.json(result.rows[0]);
 });
 
+// create the individuals get request
+app.get('/api/individuals', cors(), async (req, res) => {
+  try {
+    const { rows: individuals } = await db.query('SELECT * FROM individuals');
+    res.send(individuals);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
 // create the sightings get request
 app.get('/api/sightings', cors(), async (req, res) => {
   try {
-    const { rows: sightings } = await db.query('SELECT * FROM sightings');
+    const { rows: sightings } = await db.query('SELECT individuals.nickname, sightings.datetime, sightings.health, sightings.locations, sightings.email FROM individuals INNER JOIN sightings ON individuals.id=sightings.individualsighted');
     res.send(sightings);
   } catch (e) {
     return res.status(400).json({ e });

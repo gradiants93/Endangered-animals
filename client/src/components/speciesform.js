@@ -80,6 +80,7 @@ const SpeciesForm = (props) => {
           value={species.numberinthewild}
           onChange={handleNumberInTheWildChange}
         />
+        {/*  */}
         <label>Conservation Status</label>
         <input
           type="text"

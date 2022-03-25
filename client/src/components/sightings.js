@@ -31,7 +31,7 @@ function Sightings() {
         {sightings.map((sighting) => (
           <li key={sighting.id}>
             {" "}
-            Date and Time: {sighting.datetime} Location: {sighting.locations} Individual Sighted: {sighting.individualsighted} Heath status: {boolToStr(sighting.health)} Contact Email: {sighting.email}
+            <strong>Date and Time:</strong> {sighting.datetime} <strong>Location:</strong> {sighting.locations} <strong>Individual Sighted:</strong> {sighting.nickname} <strong>Heath status:</strong> {boolToStr(sighting.health)} Contact Email: {sighting.email}
           </li>
         ))}
       </ul>
