@@ -1,11 +1,14 @@
 import "./App.css";
-import Students from "./components/students";
+import Species from "./components/species";
+import Sightings from "./components/sightings";
 
 function App() {
+  // const [page, setPage] = useState("sightings")
   return (
     <div className="App">
       Hello from Techtonica
-      <Students />
+      <Species />
+      <Sightings />
     </div>
   );
 }
