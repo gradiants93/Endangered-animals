@@ -24,7 +24,7 @@ function Species() {
         {species.map((species) => (
           <li key={species.id}>
             {" "}
-            {species.commonname} {species.scientificname} {species.numberinthewild}
+            {species.commonname} {species.scientificname} {species.numberinthewild} {species.conservationstatus}
           </li>
         ))}
       </ul>

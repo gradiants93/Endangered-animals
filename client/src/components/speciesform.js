@@ -5,6 +5,7 @@ const SpeciesForm = (props) => {
     commonname: "",
     scientificname: "",
     numberinthewild: "",
+    conservationstatus: "",
   });
 
   //create functions that handle the event of the user typing into the form
@@ -21,6 +22,11 @@ const SpeciesForm = (props) => {
   const handleNumberInTheWildChange = (event) => {
     const numberinthewild = event.target.value;
     setSpecies((species) => ({ ...species, numberinthewild }));
+  };
+
+  const handleConservationStatusChange = (event) => {
+    const conservationstatus= event.target.value;
+    setSpecies((species) => ({ ...species, conservationstatus }));
   };
 
   //A function to handle the post request
@@ -73,6 +79,15 @@ const SpeciesForm = (props) => {
           required
           value={species.numberinthewild}
           onChange={handleNumberInTheWildChange}
+        />
+        <label>Conservation Status</label>
+        <input
+          type="text"
+          id="add-conservation-status"
+          placeholder="Conservation Status Code"
+          required
+          value={species.conservationstatus}
+          onChange={handleConservationStatusChange}
         />
       </fieldset>
       <button type="submit">Add</button>

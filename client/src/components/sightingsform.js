@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import IndividualsDropDown from "./individualsdropdown";
 
 const SightingsForm = (props) => {
   const [sightings, setSightings] = useState({
@@ -8,6 +9,18 @@ const SightingsForm = (props) => {
     email: "",
     individualseen: "",
   });
+  const [individuals, setIndividuals] = useState([]);
+
+
+  useEffect(() => {
+    fetch("http://localhost:4000/api/individuals")
+      .then((response) => response.json())
+      .then((individuals) => {
+        setIndividuals(individuals);
+      });
+  }, []);
+
+
   // mock data here
   const individualOptions = [{nickname: "twosie", id: 2}, {nickname: "onesie", id: 1}]
 
@@ -35,6 +48,7 @@ const SightingsForm = (props) => {
   const handleIndividualChange = (event) => {
     const individualseen = event.target.value;
     setSightings((sightings) => ({ ...sightings, individualseen }));
+    console.log(individualseen)
   };
   
   //A function to handle the post request
@@ -56,6 +70,7 @@ const SightingsForm = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     postSightings(sightings);
+    console.log(sightings);
   };
 
   return (
@@ -83,14 +98,15 @@ const SightingsForm = (props) => {
         />
         <br></br>
         <label>Individual Seen</label>
-        <select onChange={handleIndividualChange}
+        <IndividualsDropDown handleIndividualNickname={handleIndividualChange}/>
+        {/* <select onChange={handleIndividualChange}
           id="add-individual"
           required
         >
             {individualOptions.map((option, index) => (
                 <option key={index} value={option.id}>{option.nickname}</option>
             ))}
-        </select>
+        </select> */}
 <fieldset>
         <label>Health Status</label>
         <br></br>
@@ -124,7 +140,6 @@ const SightingsForm = (props) => {
           type="text"
           id="add-email"
           placeholder="Email for contact"
-          required
           value={sightings.email}
           onChange={handleEmailChange}
         />
